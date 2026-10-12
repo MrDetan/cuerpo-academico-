@@ -12,7 +12,7 @@ export const Footer = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{ width: '48px', height: '48px', borderRadius: '6px', backgroundColor: '#FFFFFF', padding: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <img
-                  src="/assets/uas_imago.png"
+                  src="./assets/uas_imago.png"
                   alt="UAS"
                   style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                 />

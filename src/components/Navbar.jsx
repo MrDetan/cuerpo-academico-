@@ -76,7 +76,7 @@ export const Navbar = ({ activeView, setActiveView, onOpenDashboard }) => {
           >
             <div className="brand-crest-box">
               <img 
-                src="/assets/uas_imago.png" 
+                src="./assets/uas_imago.png" 
                 alt="Águila UAS" 
                 onError={(e) => {
                   e.target.style.display = 'none';
