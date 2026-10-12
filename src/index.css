@@ -1,0 +1,1006 @@
+/* ==========================================================================
+   SISTEMA DE DISEÑO EDITORIAL: SERIF
+   Universidad Autónoma de Sinaloa (UAS) • Unidad Regional Norte (Los Mochis)
+   Cuerpo Académico UAS-CA-318: Estudios Políticos y Gobernanza
+   ========================================================================== */
+
+:root {
+  /* Paleta Cromática Institucional & Editorial */
+  --bg-page: #FAFAF8;            /* Marfil cálido, base editorial */
+  --bg-card: #FFFFFF;            /* Blanco puro con relieve sutil */
+  --bg-muted: #F3F1EC;           /* Superficie secundaria cálida */
+  --bg-subtle: #FAF7F2;          /* Tinte suave para áreas destacadas */
+  
+  --text-main: #1A1A1A;          /* Negro intenso editorial (no puro #000) */
+  --text-muted: #5C5852;         /* Gris cálido para párrafos y descripciones */
+  --text-light: #7E7870;         /* Metadatos y fechas */
+  
+  --border-light: #E5E0D8;       /* Reglas finas de 1px */
+  --border-medium: #D0C9BE;      /* Bordes activos e inputs */
+  
+  /* Acentos de Identidad */
+  --uas-blue: #08338F;           /* Azul UAS oficial (Pantone 661 C) */
+  --uas-blue-dark: #05215E;      /* Azul marino profundo */
+  --uas-blue-soft: #EEF3FA;      /* Fondo suave para insignias institucionales */
+  
+  --gold: #B8860B;               /* Oro bruñido editorial */
+  --gold-hover: #D4A84B;         /* Oro luminoso para hover */
+  --uas-gold: #C49E0D;           /* Dorado UAS (Pantone 117 C) */
+  --gold-tint: rgba(184, 134, 11, 0.08);
+
+  /* Tipografías */
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+
+  /* Elevaciones */
+  --shadow-card: 0 2px 8px rgba(26, 26, 26, 0.04), 0 1px 2px rgba(26, 26, 26, 0.02);
+  --shadow-hover: 0 8px 24px rgba(26, 26, 26, 0.08), 0 2px 6px rgba(26, 26, 26, 0.03);
+  --shadow-gold: 0 4px 14px rgba(184, 134, 11, 0.22);
+}
+
+/* --------------------------------------------------------------------------
+   Reset Global y Normalización de Botones
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-main);
+  background-color: var(--bg-page);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Textura táctil editorial de fondo */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(26, 26, 26, 0.025) 1px, transparent 0);
+  background-size: 24px 24px;
+  z-index: 9999;
+  opacity: 0.7;
+}
+
+/* Reset CRÍTICO de botones HTML */
+button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: inherit;
+  outline: none;
+  display: inline-flex;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   Tipografía y Reglas de Encabezados (Sin colisiones de texto)
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* Línea de altura segura para h1 en español con tildes y diacríticos */
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  line-height: 1.28; /* IMPORTANTE: nunca inferior a 1.25 para evitar colisiones */
+  letter-spacing: -0.015em;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  line-height: 1.3;
+  color: var(--text-main);
+  margin-bottom: 0.75rem;
+}
+
+.card-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.35;
+  color: var(--text-main);
+}
+
+/* Versalitas / Small Caps Editorial */
+.small-caps {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   Estructuras de Contenedor
+   -------------------------------------------------------------------------- */
+.hub-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.hub-container-narrow {
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Patrón de Regla de Sección (Editorial Rule Line)
+   -------------------------------------------------------------------------- */
+.editorial-rule {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  width: 100%;
+}
+
+.editorial-rule::before,
+.editorial-rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-light);
+}
+
+.editorial-rule span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Botones de Acción con Jerarquía
+   -------------------------------------------------------------------------- */
+.btn-primary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--uas-blue);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 6px;
+  border: 1px solid var(--uas-blue);
+  box-shadow: 0 2px 4px rgba(8, 51, 143, 0.15);
+  transition: all 180ms ease-out;
+}
+
+.btn-primary-action:hover {
+  background-color: var(--uas-blue-dark);
+  border-color: var(--uas-blue-dark);
+  box-shadow: 0 4px 10px rgba(8, 51, 143, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-gold-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--gold);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 6px;
+  border: 1px solid var(--gold);
+  box-shadow: var(--shadow-gold);
+  transition: all 180ms ease-out;
+}
+
+.btn-gold-action:hover {
+  background-color: var(--gold-hover);
+  border-color: var(--gold-hover);
+  transform: translateY(-1px);
+}
+
+.btn-secondary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #FFFFFF;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border-radius: 6px;
+  border: 1px solid var(--border-medium);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 180ms ease-out;
+}
+
+.btn-secondary-action:hover {
+  background-color: var(--bg-muted);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.btn-text-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.6rem;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: color 150ms ease;
+}
+
+.btn-text-action:hover {
+  color: var(--gold);
+}
+
+/* --------------------------------------------------------------------------
+   Barra Superior Institucional UAS
+   -------------------------------------------------------------------------- */
+.top-institutional-bar {
+  background-color: var(--uas-blue);
+  color: #FFFFFF;
+  padding: 0.45rem 1rem;
+  font-size: 0.8125rem;
+  border-bottom: 2px solid var(--uas-gold);
+}
+
+.top-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.badge-uas-pill {
+  background-color: #041842;
+  color: #F1C40F;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  border: 1px solid rgba(241, 196, 15, 0.3);
+}
+
+.top-bar-text {
+  font-weight: 500;
+  color: #F8F9FA;
+  letter-spacing: 0.01em;
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* --------------------------------------------------------------------------
+   Navegación Principal (Limpia y Pulcra)
+   -------------------------------------------------------------------------- */
+.main-navbar {
+  background-color: rgba(250, 250, 248, 0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72px;
+  gap: 1rem;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.brand-crest-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+  background-color: #FFFFFF;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.brand-crest-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.brand-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  line-height: 1.2;
+}
+
+.brand-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.brand-sub {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  line-height: 1.2;
+}
+
+.nav-links-desktop {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-link-btn {
+  padding: 0.55rem 0.85rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-main);
+  border-radius: 5px;
+  transition: all 150ms ease;
+  position: relative;
+}
+
+.nav-link-btn:hover {
+  color: var(--uas-blue);
+  background-color: var(--bg-muted);
+}
+
+.nav-link-btn.active {
+  color: var(--uas-blue);
+  font-weight: 600;
+}
+
+.nav-link-btn.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 0.85rem;
+  right: 0.85rem;
+  height: 2px;
+  background-color: var(--gold);
+  border-radius: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Sección Hero (Portada Editorial)
+   -------------------------------------------------------------------------- */
+.hero-section {
+  padding-top: 3.5rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid var(--border-light);
+  text-align: center;
+  position: relative;
+}
+
+.hero-badge-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-main);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+.hero-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-light);
+}
+
+@media (min-width: 768px) {
+  .hero-stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+.stat-item {
+  position: relative;
+}
+
+.stat-number {
+  font-family: var(--font-serif);
+  font-size: 2.75rem;
+  font-weight: 600;
+  color: var(--uas-blue);
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  margin-bottom: 0.25rem;
+}
+
+.stat-desc {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  line-height: 1.35;
+}
+
+/* --------------------------------------------------------------------------
+   Tarjetas de Investigadores (Fichas Personales)
+   -------------------------------------------------------------------------- */
+.professors-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 992px) {
+  .professors-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.professor-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 200ms ease;
+}
+
+.professor-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--uas-blue);
+}
+
+.professor-card:hover {
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-hover);
+}
+
+.prof-top-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.snii-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: var(--uas-blue-soft);
+  color: var(--uas-blue);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+}
+
+.prodep-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--bg-muted);
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.prof-header-flex {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+}
+
+.prof-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+}
+
+.prof-name {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.25;
+  margin-bottom: 0.25rem;
+}
+
+.prof-role {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.prof-bio-brief {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.prof-lines-box {
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.lines-header {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.lines-list {
+  list-style: none;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.lines-list li {
+  margin-bottom: 0.35rem;
+  position: relative;
+  padding-left: 0.85rem;
+}
+
+.lines-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: bold;
+}
+
+.prof-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: #FAFAF8;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 0.6rem 0.5rem;
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.prof-stat-val {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--uas-blue);
+  line-height: 1.1;
+}
+
+.prof-stat-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--text-light);
+  letter-spacing: 0.05em;
+}
+
+.prof-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-light);
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   Dossier Completo del Investigador
+   -------------------------------------------------------------------------- */
+.dossier-top-nav {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid var(--border-light);
+  padding: 0.75rem 0;
+  position: sticky;
+  top: 72px;
+  z-index: 40;
+}
+
+.dossier-header-section {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid var(--border-light);
+  padding: 3rem 0;
+}
+
+.dossier-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 992px) {
+  .dossier-grid {
+    grid-template-columns: 280px 1fr;
+  }
+}
+
+.dossier-portrait {
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 1.25rem;
+}
+
+.dossier-tab-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding-bottom: 1px;
+}
+
+.dossier-tab-btn {
+  padding: 0.65rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-radius: 6px 6px 0 0;
+  transition: all 150ms ease;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dossier-tab-btn:hover {
+  color: var(--text-main);
+  background-color: var(--bg-muted);
+}
+
+.dossier-tab-btn.active {
+  color: var(--uas-blue);
+  font-weight: 600;
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-bottom-color: #FFFFFF;
+  margin-bottom: -1px;
+}
+
+/* --------------------------------------------------------------------------
+   Tarjeta de Publicación / Paper
+   -------------------------------------------------------------------------- */
+.paper-item-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow-card);
+  transition: all 180ms ease;
+  position: relative;
+}
+
+.paper-item-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 4px 14px rgba(26, 26, 26, 0.05);
+}
+
+.paper-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.type-pill {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: var(--uas-blue-soft);
+  color: var(--uas-blue);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.paper-year {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.paper-title {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin-bottom: 0.45rem;
+}
+
+.paper-meta {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.paper-meta strong {
+  color: var(--text-main);
+}
+
+.paper-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.8125rem;
+}
+
+/* --------------------------------------------------------------------------
+   Inputs y Buscadores
+   -------------------------------------------------------------------------- */
+.search-control-bar {
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-card);
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .filter-grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+  }
+}
+
+.input-box {
+  width: 100%;
+  height: 42px;
+  padding: 0 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--text-main);
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-medium);
+  border-radius: 5px;
+  outline: none;
+  transition: all 150ms ease;
+}
+
+.input-box:focus {
+  border-color: var(--uas-blue);
+  box-shadow: 0 0 0 3px rgba(8, 51, 143, 0.1);
+}
+
+/* --------------------------------------------------------------------------
+   Modal de Citas Bibliográficas
+   -------------------------------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.modal-container {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  max-width: 650px;
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-top-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: var(--gold);
+}
+
+/* --------------------------------------------------------------------------
+   Pie de Página Editorial
+   -------------------------------------------------------------------------- */
+.editorial-footer {
+  background-color: #161616;
+  color: #FAFAF8;
+  padding-top: 4rem;
+  padding-bottom: 3rem;
+  border-top: 3px solid var(--uas-gold);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1.5fr;
+  }
+}

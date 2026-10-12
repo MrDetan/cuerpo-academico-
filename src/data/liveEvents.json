@@ -1,0 +1,38 @@
+[
+  {
+    "id": "evento-1",
+    "titulo": "Coloquio Nacional: Elecciones, Alternancia y Calidad Democrática en Sinaloa",
+    "fecha": "24 y 25 de Octubre de 2026",
+    "hora": "09:30 - 18:00 hrs (Hora del Pacífico)",
+    "modalidad": "Híbrida (Presencial y Transmisión en Vivo)",
+    "sede": "Auditorio 'Dr. José Vasconcelos', Facultad de Derecho y Ciencia Política, UAS Los Mochis",
+    "organizador": "Cuerpo Académico UAS-CA-318 en colaboración con AMECIP",
+    "descripcion": "Encuentro académico de primer nivel que reunirá a investigadores, consejeros electorales y sociedad civil para debatir sobre la fiscalización, la violencia política en razón de género y las tendencias de votación en el noroeste mexicano.",
+    "estado": "Próximo Evento",
+    "ponentePrincipal": "Conferencia inaugural impartida por la Dra. Celia Gastélum y especialistas invitados de UNAM y CIDE."
+  },
+  {
+    "id": "evento-2",
+    "titulo": "Seminario Permanente: Transparencia, Datos Abiertos y Rendición de Cuentas Municipal",
+    "fecha": "18 de Noviembre de 2026",
+    "hora": "11:00 - 13:30 hrs",
+    "modalidad": "Virtual vía Zoom Institucional UAS",
+    "sede": "Sala Virtual de Posgrado de Ciencia Política Los Mochis",
+    "organizador": "Cuerpo Académico UAS-CA-318",
+    "descripcion": "Taller teórico-práctico sobre el uso de la Plataforma Nacional de Transparencia (PNT) para investigaciones periodísticas y académicas en la región norte de Sinaloa.",
+    "estado": "Registro Abierto",
+    "ponentePrincipal": "Coordinado por el Dr. Jesús Roberto Valenzuela Cázarez."
+  },
+  {
+    "id": "evento-3",
+    "titulo": "Presentación Editorial: 'Poder Local y Ciudadanía en Sinaloa' (UAS / Siglo XXI)",
+    "fecha": "12 de Septiembre de 2026",
+    "hora": "17:00 hrs",
+    "modalidad": "Presencial",
+    "sede": "Biblioteca Central Unidad Regional Norte, Los Mochis",
+    "organizador": "Cuerpo Académico UAS-CA-318",
+    "descripcion": "Presentación formal del libro coordinado por la Dra. Celia Margarita Gastélum, con comentarios de reconocidos politólogos regionales y debate con la comunidad estudiantil.",
+    "estado": "Concluido",
+    "ponentePrincipal": "Comentaristas invitados de El Colegio de Sonora y Universidad de Guadalajara."
+  }
+]
