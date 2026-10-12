@@ -127,7 +127,11 @@ export const Footer = () => {
           fontSize: '0.72rem',
           letterSpacing: '0.16em',
           textTransform: 'uppercase',
-          color: 'rgba(255, 255, 255, 0.5)'
+          color: 'rgba(255, 255, 255, 0.5)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '8px'
         }}>
           <span>Powered by </span>
           <strong style={{
@@ -137,6 +141,17 @@ export const Footer = () => {
           }}>
             POLYLAB
           </strong>
+          <span style={{ color: 'rgba(255, 255, 255, 0.3)' }}>•</span>
+          <span style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+            padding: '2px 7px',
+            borderRadius: '4px',
+            color: '#FFFFFF',
+            fontSize: '0.68rem',
+            fontWeight: 600
+          }}>
+            v0.1
+          </span>
         </div>
       </div>
     </footer>
