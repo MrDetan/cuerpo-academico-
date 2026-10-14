@@ -6,7 +6,7 @@ export const EventsSection = ({ events, onOpenDashboard }) => {
   const eventsList = (Array.isArray(events) && events.length > 0) ? events : fallbackEvents;
 
   return (
-    <section id="eventos" style={{ padding: '4.5rem 0', borderBottom: '1px solid var(--border-light)', backgroundColor: 'var(--bg-page)' }}>
+    <section id="eventos" className="editorial-section events-section-wrap">
       <div className="hub-container">
         {/* Regla de Sección */}
         <div className="editorial-rule" style={{ maxWidth: '600px', margin: '0 auto 1.5rem auto' }}>
@@ -25,8 +25,7 @@ export const EventsSection = ({ events, onOpenDashboard }) => {
           {onOpenDashboard && (
             <button
               onClick={onOpenDashboard}
-              className="btn-secondary-action"
-              style={{ padding: '0.45rem 1rem', fontSize: '0.8125rem', borderColor: 'var(--gold)' }}
+              className="btn-secondary-action events-dash-cta"
             >
               <Settings size={14} style={{ color: 'var(--gold)' }} />
               <span>Abrir Gestor de Eventos (Dashboard en Vivo)</span>
@@ -34,24 +33,12 @@ export const EventsSection = ({ events, onOpenDashboard }) => {
           )}
         </div>
 
-        {/* Rejilla de Eventos Dinámicos */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+        {/* Rejilla Responsiva de Eventos */}
+        <div className="events-grid">
           {eventsList.map((evento) => {
             const isUpcoming = evento.estado?.includes('Próximo') || evento.estado?.includes('Abierto');
             return (
-              <div
-                key={evento.id}
-                style={{
-                  backgroundColor: '#FFFFFF',
-                  border: '1px solid var(--border-light)',
-                  borderRadius: '8px',
-                  padding: '1.75rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  boxShadow: 'var(--shadow-card)'
-                }}
-              >
+              <div key={evento.id} className="event-card">
                 <div>
                   <div style={{
                     display: 'flex',
@@ -118,13 +105,12 @@ export const EventsSection = ({ events, onOpenDashboard }) => {
                   {isUpcoming ? (
                     <a
                       href="#contacto"
-                      className="btn-primary-action"
-                      style={{ width: '100%', fontSize: '0.8125rem', padding: '0.5rem 1rem' }}
+                      className="btn-primary-action event-register-btn"
                     >
                       Solicitar Registro / Enlace
                     </a>
                   ) : (
-                    <div style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-light)', textAlign: 'center' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-light)', textAlign: 'center', padding: '0.35rem 0' }}>
                       Memoria del evento archivada
                     </div>
                   )}

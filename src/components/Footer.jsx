@@ -2,6 +2,8 @@ import React from 'react';
 import { academicBodyData } from '../data/academicData';
 import { Mail, MapPin, Phone, ExternalLink } from 'lucide-react';
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export const Footer = () => {
   return (
     <footer id="contacto" className="editorial-footer">
@@ -110,7 +112,7 @@ export const Footer = () => {
           color: 'rgba(255, 255, 255, 0.45)'
         }}>
           <div>
-            © {new Date().getFullYear()} Universidad Autónoma de Sinaloa • Cuerpo Académico UAS-CA-318.
+            © {CURRENT_YEAR} Universidad Autónoma de Sinaloa • Cuerpo Académico UAS-CA-318.
           </div>
           <div>
             Facultad de Derecho y Ciencia Política • Unidad Regional Norte, Los Mochis.

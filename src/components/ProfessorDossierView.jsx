@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { professorsData } from '../data/academicData';
 import { 
-  ArrowLeft, Award, BookOpen, ExternalLink, FileText, 
+  ArrowLeft, Award, ExternalLink, FileText, 
   GraduationCap, Mail, MapPin, Share2, Quote, Search, 
   Printer, Check, ChevronDown, ChevronUp, Users 
 } from 'lucide-react';
@@ -59,32 +59,31 @@ export const ProfessorDossierView = ({ professorId, onBack, onSelectProfessor, o
   };
 
   return (
-    <article style={{ minHeight: '100vh', backgroundColor: 'var(--bg-page)', paddingBottom: '5rem' }}>
+    <article className="dossier-article">
       {/* Barra de Navegación del Dossier */}
       <div className="dossier-top-nav">
         <div className="hub-container">
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div className="dossier-top-nav-inner">
+            <div className="dossier-nav-left">
               <button
                 onClick={onBack}
-                className="btn-secondary-action"
-                style={{ padding: '0.45rem 0.85rem', fontSize: '0.8125rem' }}
+                className="btn-secondary-action dossier-back-btn"
               >
                 <ArrowLeft size={14} />
-                <span>Volver al HUB General</span>
+                <span className="dossier-back-btn-text">Volver al HUB General</span>
+                <span className="dossier-back-btn-short">Volver</span>
               </button>
-              <span style={{ color: 'var(--border-medium)' }}>|</span>
-              <span style={{ fontSize: '0.8125rem', color: 'var(--text-light)', fontFamily: 'var(--font-mono)' }}>
+              <span className="dossier-nav-sep">|</span>
+              <span className="dossier-breadcrumb">
                 Expediente Curricular de Investigación
               </span>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div className="dossier-nav-right">
               {otherProfessor && (
                 <button
                   onClick={() => onSelectProfessor(otherProfessor.id)}
-                  className="btn-secondary-action"
-                  style={{ padding: '0.45rem 0.85rem', fontSize: '0.8125rem', color: 'var(--uas-blue)' }}
+                  className="btn-secondary-action dossier-switch-btn"
                 >
                   <Users size={13} />
                   <span>Ver a {otherProfessor.tituloCorto}</span>
@@ -98,17 +97,16 @@ export const ProfessorDossierView = ({ professorId, onBack, onSelectProfessor, o
                 title="Copiar enlace directo"
               >
                 {copiedLink ? <Check size={13} style={{ color: 'green' }} /> : <Share2 size={13} />}
-                <span>{copiedLink ? 'Copiado' : 'Compartir'}</span>
+                <span className="dossier-action-label">{copiedLink ? 'Copiado' : 'Compartir'}</span>
               </button>
 
               <button
                 onClick={() => window.print()}
-                className="btn-secondary-action"
-                style={{ padding: '0.45rem 0.75rem', fontSize: '0.8125rem' }}
+                className="btn-secondary-action dossier-print-btn"
                 title="Imprimir expediente"
               >
                 <Printer size={13} />
-                <span>Imprimir</span>
+                <span className="dossier-action-label">Imprimir</span>
               </button>
             </div>
           </div>
@@ -120,14 +118,14 @@ export const ProfessorDossierView = ({ professorId, onBack, onSelectProfessor, o
         <div className="hub-container">
           <div className="dossier-grid">
             {/* Columna Izquierda: Retrato y Contacto */}
-            <div>
+            <div className="dossier-left-col">
               <img
                 src={professor.foto}
                 alt={professor.nombreCompleto}
                 className="dossier-portrait"
               />
 
-              <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
+              <div className="dossier-badges-wrap">
                 <span className="snii-badge">
                   <Award size={12} />
                   <span>{professor.snii}</span>
@@ -138,47 +136,24 @@ export const ProfessorDossierView = ({ professorId, onBack, onSelectProfessor, o
               </div>
 
               {/* Caja de Contacto */}
-              <div style={{
-                backgroundColor: 'var(--bg-subtle)',
-                border: '1px solid var(--border-light)',
-                borderRadius: '8px',
-                padding: '1.25rem',
-                fontSize: '0.8125rem'
-              }}>
-                <div style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.7rem',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  color: 'var(--gold)',
-                  letterSpacing: '0.1em',
-                  marginBottom: '0.75rem',
-                  borderBottom: '1px solid var(--border-light)',
-                  paddingBottom: '0.4rem'
-                }}>
+              <div className="dossier-contact-box">
+                <div className="dossier-contact-header">
                   Ficha de Contacto
                 </div>
 
-                <div style={{ display: 'flex', gap: '8px', marginBottom: '0.6rem', color: 'var(--text-muted)' }}>
+                <div className="dossier-contact-item">
                   <Mail size={14} style={{ color: 'var(--gold)', flexShrink: 0, marginTop: '3px' }} />
                   <a href={`mailto:${professor.email}`} style={{ color: 'var(--text-main)', wordBreak: 'break-all' }}>
                     {professor.email}
                   </a>
                 </div>
 
-                <div style={{ display: 'flex', gap: '8px', marginBottom: '0.75rem', color: 'var(--text-muted)' }}>
+                <div className="dossier-contact-item">
                   <MapPin size={14} style={{ color: 'var(--gold)', flexShrink: 0, marginTop: '3px' }} />
                   <span>Facultad de Derecho y Ciencia Política, UAS Unidad Regional Norte, Los Mochis, Sin.</span>
                 </div>
 
-                <div style={{
-                  paddingTop: '0.6rem',
-                  borderTop: '1px solid var(--border-light)',
-                  fontFamily: 'var(--font-mono)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px'
-                }}>
+                <div className="dossier-orcid-wrap">
                   <span style={{ color: 'var(--text-light)' }}>ORCID:</span>
                   <a 
                     href={`https://orcid.org/${professor.orcid}`} 
@@ -194,66 +169,32 @@ export const ProfessorDossierView = ({ professorId, onBack, onSelectProfessor, o
             </div>
 
             {/* Columna Derecha: Biografía, Grados y Distinciones */}
-            <div>
+            <div className="dossier-right-col">
               <span className="small-caps" style={{ color: 'var(--gold)' }}>
                 Cuerpo Académico UAS-CA-318
               </span>
-              <h1 style={{ 
-                fontFamily: 'var(--font-serif)', 
-                fontSize: '2.4rem', 
-                fontWeight: 600, 
-                lineHeight: 1.25, 
-                margin: '0.35rem 0 0.5rem 0' 
-              }}>
+              <h1 className="dossier-prof-name">
                 {professor.nombreCompleto}
               </h1>
-              <div style={{ 
-                fontSize: '0.95rem', 
-                fontWeight: 600, 
-                color: 'var(--uas-blue)', 
-                marginBottom: '1.25rem' 
-              }}>
+              <div className="dossier-prof-role">
                 {professor.cargo}
               </div>
 
               {/* Biografía */}
-              <div style={{ 
-                fontSize: '0.9375rem', 
-                color: 'var(--text-muted)', 
-                lineHeight: 1.75, 
-                borderLeft: '2px solid var(--gold)', 
-                paddingLeft: '1rem', 
-                marginBottom: '2rem',
-                whiteSpace: 'pre-line'
-              }}>
+              <div className="dossier-bio-text">
                 {professor.biografia}
               </div>
 
               {/* Formación Académica */}
               <div style={{ marginBottom: '2rem' }}>
-                <h3 style={{ 
-                  fontFamily: 'var(--font-serif)', 
-                  fontSize: '1.2rem', 
-                  marginBottom: '1rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px'
-                }}>
+                <h3 className="dossier-sub-title">
                   <GraduationCap size={18} style={{ color: 'var(--uas-blue)' }} />
                   <span>Formación Académica</span>
                 </h3>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+                <div className="dossier-education-grid">
                   {professor.educacion.map((edu, idx) => (
-                    <div 
-                      key={idx} 
-                      style={{ 
-                        backgroundColor: 'var(--bg-subtle)', 
-                        border: '1px solid var(--border-light)', 
-                        borderRadius: '8px', 
-                        padding: '1rem' 
-                      }}
-                    >
+                    <div key={idx} className="dossier-edu-card">
                       <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--gold)', fontWeight: 700, marginBottom: '4px' }}>
                         {edu.anio}
                       </div>
@@ -284,21 +225,13 @@ export const ProfessorDossierView = ({ professorId, onBack, onSelectProfessor, o
 
               {/* Reconocimientos */}
               <div>
-                <h3 style={{ 
-                  fontFamily: 'var(--font-serif)', 
-                  fontSize: '1.2rem', 
-                  marginBottom: '0.75rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px'
-                }}>
+                <h3 className="dossier-sub-title">
                   <Award size={18} style={{ color: 'var(--gold)' }} />
                   <span>Reconocimientos y Distinciones</span>
                 </h3>
-                <ul style={{ listStyle: 'none', fontSize: '0.875rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                <ul className="dossier-distinciones-list">
                   {professor.distinciones.map((dist, dIdx) => (
-                    <li key={dIdx} style={{ position: 'relative', paddingLeft: '1.2rem', marginBottom: '0.35rem' }}>
-                      <span style={{ position: 'absolute', left: 0, color: 'var(--gold)', fontWeight: 'bold' }}>•</span>
+                    <li key={dIdx}>
                       <span>{dist}</span>
                     </li>
                   ))}
@@ -310,13 +243,13 @@ export const ProfessorDossierView = ({ professorId, onBack, onSelectProfessor, o
       </section>
 
       {/* Catálogo de Trabajos del Investigador */}
-      <section style={{ paddingTop: '3rem' }}>
+      <section style={{ paddingTop: '2.5rem' }}>
         <div className="hub-container">
-          <div className="editorial-rule" style={{ marginBottom: '2rem' }}>
+          <div className="editorial-rule" style={{ marginBottom: '1.75rem' }}>
             <span>Catálogo Completo de Producción Científica</span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
+          <div className="dossier-catalog-header">
             <div>
               <h2 className="section-title">Trabajos y Proyectos de Investigación</h2>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-light)', textTransform: 'uppercase' }}>
@@ -325,8 +258,8 @@ export const ProfessorDossierView = ({ professorId, onBack, onSelectProfessor, o
             </div>
 
             {/* Búsqueda y Año */}
-            <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
-              <div style={{ position: 'relative', minWidth: '220px' }}>
+            <div className="dossier-filter-row">
+              <div style={{ position: 'relative', flex: '1 1 200px' }}>
                 <Search size={14} style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-light)' }} />
                 <input
                   type="text"
@@ -335,14 +268,15 @@ export const ProfessorDossierView = ({ professorId, onBack, onSelectProfessor, o
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="input-box"
                   style={{ paddingLeft: '32px' }}
+                  aria-label="Buscar en trabajos"
                 />
               </div>
 
               <select
                 value={selectedYear}
                 onChange={(e) => setSelectedYear(e.target.value)}
-                className="input-box"
-                style={{ width: 'auto', cursor: 'pointer' }}
+                className="input-box dossier-year-select"
+                aria-label="Filtrar por año"
               >
                 <option value="todos">Todos los Años</option>
                 {availableYears.map(yr => (
@@ -368,13 +302,7 @@ export const ProfessorDossierView = ({ professorId, onBack, onSelectProfessor, o
                 className={`dossier-tab-btn ${activeTab === tab.id ? 'active' : ''}`}
               >
                 <span>{tab.label}</span>
-                <span style={{ 
-                  backgroundColor: 'var(--bg-muted)', 
-                  padding: '1px 6px', 
-                  borderRadius: '10px', 
-                  fontSize: '0.65rem',
-                  fontFamily: 'var(--font-mono)'
-                }}>
+                <span className="dossier-tab-count">
                   {tab.count}
                 </span>
               </button>
@@ -399,7 +327,7 @@ export const ProfessorDossierView = ({ professorId, onBack, onSelectProfessor, o
                 return (
                   <div key={work.id} className="paper-item-card">
                     <div className="paper-header">
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                         <span className="type-pill">
                           {work.tipoDetalle || work.tipo}
                         </span>
@@ -460,7 +388,7 @@ export const ProfessorDossierView = ({ professorId, onBack, onSelectProfessor, o
                         <button
                           onClick={() => toggleAbstract(work.id)}
                           className="btn-text-action"
-                          style={{ padding: '0.2rem 0', color: 'var(--gold)', fontWeight: 600 }}
+                          style={{ padding: '0.3rem 0', color: 'var(--gold)', fontWeight: 600 }}
                         >
                           <span>{isAbstractExpanded ? 'Ocultar Resumen' : 'Ver Resumen / Abstract'}</span>
                           {isAbstractExpanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
@@ -486,27 +414,29 @@ export const ProfessorDossierView = ({ professorId, onBack, onSelectProfessor, o
 
                     {/* Pie de Trabajo */}
                     <div className="paper-footer">
-                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-light)' }}>
+                      <div className="paper-citations-info">
                         {work.doi && (
-                          <span>DOI: <a href={work.enlace} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--uas-blue)' }}>{work.doi}</a></span>
+                          <span className="paper-doi-wrap">DOI: <a href={work.enlace} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--uas-blue)' }}>{work.doi}</a></span>
                         )}
                         {work.citas && (
-                          <span style={{ marginLeft: '12px', fontWeight: 600, color: 'var(--text-main)' }}>Citas: {work.citas}</span>
+                          <span className="paper-citas-badge">Citas: {work.citas}</span>
                         )}
                       </div>
 
-                      {work.enlace && work.enlace !== '#' && (
-                        <a
-                          href={work.enlace}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-secondary-action"
-                          style={{ padding: '0.35rem 0.75rem', fontSize: '0.78rem' }}
-                        >
-                          <span>Acceso al Documento</span>
-                          <ExternalLink size={12} />
-                        </a>
-                      )}
+                      <div className="paper-action-btns">
+                        {work.enlace && work.enlace !== '#' && (
+                          <a
+                            href={work.enlace}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-secondary-action"
+                            style={{ padding: '0.35rem 0.75rem', fontSize: '0.78rem' }}
+                          >
+                            <span>Acceso al Documento</span>
+                            <ExternalLink size={12} />
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </div>
                 );

@@ -4,7 +4,7 @@ import { Compass } from 'lucide-react';
 
 export const LgacSection = () => {
   return (
-    <section id="lgac" style={{ padding: '4.5rem 0', borderBottom: '1px solid var(--border-light)', backgroundColor: '#FFFFFF' }}>
+    <section id="lgac" className="editorial-section lgac-section-wrap">
       <div className="hub-container">
         {/* Regla de Sección */}
         <div className="editorial-rule" style={{ maxWidth: '600px', margin: '0 auto 1.5rem auto' }}>
@@ -20,23 +20,10 @@ export const LgacSection = () => {
           </p>
         </div>
 
-        {/* Rejilla de LGACs */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', gap: '2rem' }}>
+        {/* Rejilla Responsiva de LGACs */}
+        <div className="lgac-grid">
           {academicBodyData.lgac.map((linea) => (
-            <div
-              key={linea.id}
-              style={{
-                backgroundColor: 'var(--bg-subtle)',
-                border: '1px solid var(--border-light)',
-                borderRadius: '8px',
-                padding: '1.75rem',
-                borderTop: '3px solid var(--gold)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                boxShadow: 'var(--shadow-card)'
-              }}
-            >
+            <div key={linea.id} className="lgac-card">
               <div>
                 <div style={{
                   display: 'flex',

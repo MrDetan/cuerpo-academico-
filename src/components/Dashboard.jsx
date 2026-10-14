@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { 
   Calendar, Clock, MapPin, Plus, Edit2, Trash2, CheckCircle2, 
-  ArrowLeft, Eye, RefreshCw, Download, Sparkles, AlertCircle, Save
+  ArrowLeft, Eye, RefreshCw, Download, AlertCircle, Save
 } from 'lucide-react';
-import { professorsData, eventsData as defaultEventsData } from '../data/academicData';
+import { eventsData as defaultEventsData } from '../data/academicData';
 
 export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
   const [editingId, setEditingId] = useState(null);
@@ -120,59 +120,38 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
   };
 
   return (
-    <div style={{ backgroundColor: 'var(--bg-page)', minHeight: '100vh', paddingBottom: '6rem' }}>
+    <div className="dashboard-page-wrap">
       {/* Top Banner de Navegación del Dashboard */}
-      <div style={{ 
-        backgroundColor: '#FFFFFF', 
-        borderBottom: '1px solid var(--border-light)', 
-        position: 'sticky', 
-        top: '72px', 
-        zIndex: 40,
-        boxShadow: '0 1px 4px rgba(0, 0, 0, 0.03)'
-      }}>
+      <div className="dash-sticky-nav">
         <div className="hub-container">
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'space-between', 
-            padding: '0.85rem 0',
-            flexWrap: 'wrap',
-            gap: '12px'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div className="dash-top-bar">
+            <div className="dash-nav-left">
               <button
                 onClick={onBackToLiveSite}
-                className="btn-secondary-action"
-                style={{ padding: '0.45rem 0.85rem', fontSize: '0.8125rem' }}
+                className="btn-secondary-action dash-back-btn"
               >
                 <ArrowLeft size={14} />
-                <span>Volver al Portal en Vivo</span>
+                <span className="dash-back-text">Volver al Portal en Vivo</span>
+                <span className="dash-back-short">Volver</span>
               </button>
-              <span style={{ color: 'var(--border-medium)' }}>|</span>
-              <span style={{ 
-                fontFamily: 'var(--font-mono)', 
-                fontSize: '0.8125rem', 
-                fontWeight: 600,
-                color: 'var(--uas-blue)'
-              }}>
-                Panel de Gestión de Eventos Académicos
+              <span className="dash-nav-sep">|</span>
+              <span className="dash-nav-title">
+                Panel de Gestión de Eventos
               </span>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div className="dash-top-actions">
               <button
                 onClick={handleOpenCreate}
-                className="btn-gold-action"
-                style={{ padding: '0.45rem 1rem', fontSize: '0.8125rem' }}
+                className="btn-gold-action dash-btn"
               >
                 <Plus size={14} />
-                <span>Subir Nuevo Evento</span>
+                <span>Nuevo Evento</span>
               </button>
 
               <button
                 onClick={onBackToLiveSite}
-                className="btn-primary-action"
-                style={{ padding: '0.45rem 1rem', fontSize: '0.8125rem' }}
+                className="btn-primary-action dash-btn"
               >
                 <Eye size={14} />
                 <span>Ver en Vivo</span>
@@ -182,14 +161,14 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
         </div>
       </div>
 
-      <div className="hub-container" style={{ paddingTop: '2.5rem' }}>
+      <div className="hub-container" style={{ paddingTop: '2rem' }}>
         {/* Mensaje de Estado / Notificación en Vivo */}
         {statusMessage && (
           <div style={{
             backgroundColor: statusMessage.type === 'error' ? '#fdebd0' : '#e8f8f5',
             color: statusMessage.type === 'error' ? '#922b21' : '#0e6251',
             border: `1px solid ${statusMessage.type === 'error' ? '#f5b7b1' : '#a3e4d7'}`,
-            padding: '1rem 1.25rem',
+            padding: '0.85rem 1.15rem',
             borderRadius: '8px',
             marginBottom: '1.5rem',
             display: 'flex',
@@ -205,16 +184,7 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
         )}
 
         {/* Encabezado del Dashboard */}
-        <div style={{
-          backgroundColor: '#FFFFFF',
-          border: '1px solid var(--border-light)',
-          borderRadius: '10px',
-          padding: '2rem',
-          marginBottom: '2rem',
-          boxShadow: 'var(--shadow-card)',
-          position: 'relative',
-          overflow: 'hidden'
-        }}>
+        <div className="dash-header-card">
           <div style={{
             position: 'absolute',
             top: 0,
@@ -224,21 +194,21 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
             backgroundColor: 'var(--uas-gold)'
           }} />
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1.5rem' }}>
+          <div className="dash-header-flex">
             <div>
               <div className="small-caps" style={{ color: 'var(--gold)', marginBottom: '4px' }}>
                 Cuerpo Académico UAS-CA-318 • Los Mochis
               </div>
-              <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', fontWeight: 600, marginBottom: '0.5rem' }}>
-                Gestor de Eventos, Coloquios y Seminarios en Vivo
+              <h1 className="dash-title">
+                Gestor de Eventos, Coloquios y Seminarios
               </h1>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', maxWidth: '680px', lineHeight: 1.6 }}>
-                Administra los eventos académicos en los que participan la <strong>Dra. Celia Gastélum</strong> y el <strong>Dr. Jesús Roberto Valenzuela</strong>. Cualquier evento que registres o edites aquí se publicará y reflejará <strong>en tiempo real</strong> en el portal público del Cuerpo Académico.
+                Administra los eventos académicos en los que participan la <strong>Dra. Celia Gastélum</strong> y el <strong>Dr. Jesús Roberto Valenzuela</strong>. Cualquier evento que registres o edites aquí se publicará y reflejará <strong>en tiempo real</strong> en el portal público.
               </p>
             </div>
 
             {/* Acciones de Respaldo */}
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            <div className="dash-backup-actions">
               <button
                 onClick={handleExportJSON}
                 className="btn-secondary-action"
@@ -256,44 +226,37 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
                 title="Restaurar eventos predeterminados"
               >
                 <RefreshCw size={13} />
-                <span>Restaurar Predeterminados</span>
+                <span>Restaurar Originales</span>
               </button>
             </div>
           </div>
 
           {/* Estadísticas de Eventos */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-            gap: '1rem',
-            marginTop: '1.75rem',
-            paddingTop: '1.5rem',
-            borderTop: '1px solid var(--border-light)'
-          }}>
-            <div style={{ backgroundColor: 'var(--bg-subtle)', padding: '1rem', borderRadius: '6px', border: '1px solid var(--border-light)' }}>
+          <div className="dash-stats-grid">
+            <div className="dash-stat-item">
               <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', fontWeight: 700, color: 'var(--uas-blue)' }}>
                 {events.length}
               </div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', textTransform: 'uppercase', color: 'var(--text-light)' }}>
-                Total de Eventos Registrados
+                Total Registrados
               </div>
             </div>
 
-            <div style={{ backgroundColor: 'var(--bg-subtle)', padding: '1rem', borderRadius: '6px', border: '1px solid var(--border-light)' }}>
+            <div className="dash-stat-item">
               <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', fontWeight: 700, color: 'var(--gold)' }}>
                 {events.filter(e => e.estado.includes('Próximo') || e.estado.includes('Abierto')).length}
               </div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', textTransform: 'uppercase', color: 'var(--text-light)' }}>
-                Eventos Próximos / En Registro
+                Próximos / Registro
               </div>
             </div>
 
-            <div style={{ backgroundColor: 'var(--bg-subtle)', padding: '1rem', borderRadius: '6px', border: '1px solid var(--border-light)' }}>
+            <div className="dash-stat-item">
               <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', fontWeight: 700, color: 'var(--text-main)' }}>
                 {events.filter(e => e.estado.includes('Concluido')).length}
               </div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem', textTransform: 'uppercase', color: 'var(--text-light)' }}>
-                Memorias / Eventos Concluidos
+                Memorias Archivadas
               </div>
             </div>
           </div>
@@ -301,22 +264,8 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
 
         {/* Formulario de Creación / Edición */}
         {isFormOpen && (
-          <div style={{
-            backgroundColor: '#FFFFFF',
-            border: '2px solid var(--uas-blue)',
-            borderRadius: '10px',
-            padding: '2rem',
-            marginBottom: '2.5rem',
-            boxShadow: 'var(--shadow-hover)'
-          }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginBottom: '1.5rem',
-              paddingBottom: '0.75rem',
-              borderBottom: '1px solid var(--border-light)'
-            }}>
+          <div className="dash-form-card">
+            <div className="dash-form-header">
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <div style={{
                   padding: '6px',
@@ -328,11 +277,11 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
                   <Calendar size={18} />
                 </div>
                 <div>
-                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', fontWeight: 600 }}>
-                    {editingId ? 'Editar Evento Académico' : 'Publicar Nuevo Evento en Vivo'}
+                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: 600 }}>
+                    {editingId ? 'Editar Evento Académico' : 'Publicar Nuevo Evento'}
                   </h3>
                   <p style={{ fontSize: '0.78rem', color: 'var(--text-light)' }}>
-                    Al hacer clic en guardar, se publicará de inmediato en la sección de eventos del sitio web.
+                    Al guardar, se publicará de inmediato en el portal público.
                   </p>
                 </div>
               </div>
@@ -340,9 +289,9 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
               <button
                 type="button"
                 onClick={handleCancelForm}
-                style={{ fontSize: '0.8125rem', color: 'var(--text-light)', cursor: 'pointer' }}
+                style={{ fontSize: '0.8125rem', color: 'var(--text-light)', cursor: 'pointer', padding: '4px' }}
               >
-                Cerrar Formulario ✕
+                Cerrar ✕
               </button>
             </div>
 
@@ -356,7 +305,7 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
                   <input
                     type="text"
                     required
-                    placeholder="Ej. Coloquio Internacional: Gobernanza y Comportamiento Electoral en Sinaloa"
+                    placeholder="Ej. Coloquio Internacional: Gobernanza y Comportamiento Electoral"
                     value={formData.titulo}
                     onChange={(e) => setFormData({ ...formData, titulo: e.target.value })}
                     className="input-box"
@@ -365,7 +314,7 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
                 </div>
 
                 {/* Grid 2 columnas: Fecha y Hora */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
+                <div className="dash-form-grid-2">
                   <div>
                     <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, marginBottom: '6px' }}>
                       Fecha del Evento *
@@ -395,7 +344,7 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
                 </div>
 
                 {/* Grid 2 columnas: Modalidad y Estado */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
+                <div className="dash-form-grid-2">
                   <div>
                     <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, marginBottom: '6px' }}>
                       Modalidad
@@ -434,7 +383,7 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
                   </label>
                   <input
                     type="text"
-                    placeholder="Ej. Auditorio 'Dr. José Vasconcelos', Facultad de Derecho y Ciencia Política, UAS Los Mochis"
+                    placeholder="Ej. Auditorio 'Dr. José Vasconcelos', UAS Los Mochis"
                     value={formData.sede}
                     onChange={(e) => setFormData({ ...formData, sede: e.target.value })}
                     className="input-box"
@@ -448,7 +397,7 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
                   </label>
                   <input
                     type="text"
-                    placeholder="Ej. Conferencia magistral impartida por la Dra. Celia Gastélum y el Dr. Jesús Roberto Valenzuela"
+                    placeholder="Ej. Dra. Celia Gastélum y Dr. Jesús Roberto Valenzuela"
                     value={formData.ponentePrincipal}
                     onChange={(e) => setFormData({ ...formData, ponentePrincipal: e.target.value })}
                     className="input-box"
@@ -462,7 +411,7 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
                   </label>
                   <textarea
                     rows={4}
-                    placeholder="Describe los ejes temáticos, los objetivos de la jornada académica y los detalles para la comunidad estudiantil y académica..."
+                    placeholder="Describe los ejes temáticos, los objetivos y detalles para la comunidad académica..."
                     value={formData.descripcion}
                     onChange={(e) => setFormData({ ...formData, descripcion: e.target.value })}
                     className="input-box"
@@ -472,30 +421,21 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
               </div>
 
               {/* Botones del Formulario */}
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-                gap: '10px',
-                paddingTop: '1.25rem',
-                borderTop: '1px solid var(--border-light)'
-              }}>
+              <div className="dash-form-actions">
                 <button
                   type="button"
                   onClick={handleCancelForm}
-                  className="btn-secondary-action"
-                  style={{ padding: '0.6rem 1.25rem' }}
+                  className="btn-secondary-action dash-form-cancel"
                 >
                   Cancelar
                 </button>
 
                 <button
                   type="submit"
-                  className="btn-primary-action"
-                  style={{ padding: '0.6rem 1.5rem', fontWeight: 700 }}
+                  className="btn-primary-action dash-form-submit"
                 >
                   <Save size={16} />
-                  <span>{editingId ? 'Guardar Cambios en Vivo' : 'Publicar Evento en Vivo 🚀'}</span>
+                  <span>{editingId ? 'Guardar Cambios' : 'Publicar Evento 🚀'}</span>
                 </button>
               </div>
             </form>
@@ -504,9 +444,9 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
 
         {/* Lista de Eventos Actuales */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
-            <h2 className="section-title" style={{ fontSize: '1.4rem' }}>
-              Eventos Actuales en el Portal Público ({events.length})
+          <div className="dash-list-header">
+            <h2 className="section-title" style={{ fontSize: '1.35rem', marginBottom: 0 }}>
+              Eventos Actuales en el Portal ({events.length})
             </h2>
             {!isFormOpen && (
               <button
@@ -524,23 +464,10 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
             {events.map((ev) => {
               const isUpcoming = ev.estado.includes('Próximo') || ev.estado.includes('Abierto');
               return (
-                <div
-                  key={ev.id}
-                  style={{
-                    backgroundColor: '#FFFFFF',
-                    border: '1px solid var(--border-light)',
-                    borderRadius: '8px',
-                    padding: '1.5rem',
-                    boxShadow: 'var(--shadow-card)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    position: 'relative'
-                  }}
-                >
+                <div key={ev.id} className="dash-event-card">
                   <div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px', marginBottom: '0.75rem' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div className="dash-event-top">
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                         <span style={{
                           fontFamily: 'var(--font-mono)',
                           fontSize: '0.6875rem',
@@ -560,7 +487,7 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
                       </div>
 
                       {/* Botones de Gestión */}
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <div className="dash-event-mgmt-btns">
                         <button
                           onClick={() => handleOpenEdit(ev)}
                           className="btn-secondary-action"
@@ -583,11 +510,11 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
                       </div>
                     </div>
 
-                    <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: 600, marginBottom: '0.5rem', lineHeight: 1.3 }}>
+                    <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 600, marginBottom: '0.5rem', lineHeight: 1.3 }}>
                       {ev.titulo}
                     </h3>
 
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', fontSize: '0.8125rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
+                    <div className="dash-event-meta-row">
                       <div style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'var(--text-main)', fontWeight: 600 }}>
                         <Calendar size={13} style={{ color: 'var(--uas-blue)' }} />
                         <span>{ev.fecha}</span>
@@ -609,16 +536,7 @@ export const Dashboard = ({ events, onUpdateEvents, onBackToLiveSite }) => {
                     </p>
                   </div>
 
-                  <div style={{
-                    paddingTop: '0.75rem',
-                    borderTop: '1px solid var(--border-light)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    fontSize: '0.78rem',
-                    color: 'var(--text-light)',
-                    fontStyle: 'italic'
-                  }}>
+                  <div className="dash-event-footer">
                     <span>{ev.ponentePrincipal}</span>
                     <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6875rem' }}>
                       ID: {ev.id}

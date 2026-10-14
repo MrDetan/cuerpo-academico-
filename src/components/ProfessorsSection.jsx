@@ -4,7 +4,7 @@ import { Award, BookOpen, ExternalLink, Mail, ArrowRight } from 'lucide-react';
 
 export const ProfessorsSection = ({ onSelectProfessor }) => {
   return (
-    <section id="investigadores" style={{ padding: '4.5rem 0', borderBottom: '1px solid var(--border-light)', backgroundColor: 'var(--bg-page)' }}>
+    <section id="investigadores" className="editorial-section professors-section-wrap">
       <div className="hub-container">
         {/* Regla de Sección */}
         <div className="editorial-rule" style={{ maxWidth: '600px', margin: '0 auto 1.5rem auto' }}>
@@ -42,14 +42,7 @@ export const ProfessorsSection = ({ onSelectProfessor }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     title="Abrir expediente en nueva pestaña del navegador"
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.72rem',
-                      color: 'var(--text-light)',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '4px'
-                    }}
+                    className="prof-new-tab-link"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <span>Nueva pestaña</span>
@@ -64,7 +57,7 @@ export const ProfessorsSection = ({ onSelectProfessor }) => {
                     alt={prof.nombreCompleto}
                     className="prof-avatar"
                   />
-                  <div>
+                  <div className="prof-header-info">
                     <h3 className="prof-name">{prof.nombreCompleto}</h3>
                     <div className="prof-role">{prof.cargo}</div>
                     <p className="prof-bio-brief">{prof.resumen}</p>
@@ -86,19 +79,19 @@ export const ProfessorsSection = ({ onSelectProfessor }) => {
 
                 {/* Resumen Numérico */}
                 <div className="prof-stats-bar">
-                  <div>
+                  <div className="prof-stat-col">
                     <div className="prof-stat-val">
                       {prof.trabajos.filter(t => t.tipo === 'Artículo').length}
                     </div>
                     <div className="prof-stat-lbl">Artículos</div>
                   </div>
-                  <div style={{ borderLeft: '1px solid var(--border-light)', borderRight: '1px solid var(--border-light)' }}>
+                  <div className="prof-stat-col prof-stat-col-center">
                     <div className="prof-stat-val">
                       {prof.trabajos.filter(t => t.tipo === 'Libro' || t.tipo === 'Capítulo').length}
                     </div>
                     <div className="prof-stat-lbl">Libros/Cap.</div>
                   </div>
-                  <div>
+                  <div className="prof-stat-col">
                     <div className="prof-stat-val">
                       {prof.citasTotales}+
                     </div>
@@ -109,10 +102,10 @@ export const ProfessorsSection = ({ onSelectProfessor }) => {
 
               {/* Botón de Expediente */}
               <div className="prof-card-footer">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem', color: 'var(--text-light)', fontFamily: 'var(--font-mono)' }}>
+                <div className="prof-contact-meta">
                   <a 
                     href={`mailto:${prof.email}`} 
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', color: 'var(--text-main)' }}
+                    className="prof-contact-link"
                   >
                     <Mail size={13} />
                     <span>Contacto</span>
@@ -123,8 +116,7 @@ export const ProfessorsSection = ({ onSelectProfessor }) => {
 
                 <button
                   onClick={() => onSelectProfessor(prof.id)}
-                  className="btn-gold-action"
-                  style={{ padding: '0.6rem 1.1rem', fontSize: '0.85rem' }}
+                  className="btn-gold-action prof-dossier-btn"
                 >
                   <span>Ver Expediente Completo</span>
                   <ArrowRight size={14} />

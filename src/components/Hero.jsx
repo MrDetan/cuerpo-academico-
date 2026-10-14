@@ -1,6 +1,6 @@
 import React from 'react';
 import { academicBodyData } from '../data/academicData';
-import { BookOpen, Users, Compass, Award } from 'lucide-react';
+import { BookOpen, Users } from 'lucide-react';
 
 export const Hero = ({ onExploreProfessors, onExplorePapers }) => {
   return (

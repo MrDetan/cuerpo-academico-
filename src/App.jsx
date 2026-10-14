@@ -9,6 +9,7 @@ import { EventsSection } from './components/EventsSection';
 import { CitationModal } from './components/CitationModal';
 import { Dashboard } from './components/Dashboard';
 import { Footer } from './components/Footer';
+import { BackToTop } from './components/BackToTop';
 import { eventsData as initialDefaultEvents } from './data/academicData';
 
 export function App() {
@@ -42,7 +43,7 @@ export function App() {
             localStorage.setItem('uas_ca_live_events', JSON.stringify(diskData));
           }
         }
-      } catch (err) {
+      } catch {
         // Fallback to localStorage or defaults
       }
     };
@@ -205,6 +206,9 @@ export function App() {
           onClose={() => setCitationWork(null)}
         />
       )}
+
+      {/* Botón flotante para volver arriba en móviles */}
+      <BackToTop />
 
       {/* Pie de Página Oficial UAS */}
       <Footer />

@@ -60,7 +60,7 @@ export const PublicationsHub = ({ onOpenCitation, onSelectProfessor }) => {
   };
 
   return (
-    <section id="publicaciones" style={{ padding: '4.5rem 0', borderBottom: '1px solid var(--border-light)', backgroundColor: 'var(--bg-page)' }}>
+    <section id="publicaciones" className="editorial-section publications-section-wrap">
       <div className="hub-container">
         {/* Regla de Sección */}
         <div className="editorial-rule" style={{ maxWidth: '600px', margin: '0 auto 1.5rem auto' }}>
@@ -89,6 +89,7 @@ export const PublicationsHub = ({ onOpenCitation, onSelectProfessor }) => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="input-box"
                 style={{ paddingLeft: '34px' }}
+                aria-label="Buscar publicaciones"
               />
             </div>
 
@@ -99,6 +100,7 @@ export const PublicationsHub = ({ onOpenCitation, onSelectProfessor }) => {
                 onChange={(e) => setSelectedAuthor(e.target.value)}
                 className="input-box"
                 style={{ cursor: 'pointer' }}
+                aria-label="Filtrar por autor"
               >
                 <option value="todos">Todos los Investigadores</option>
                 {professorsData.map(p => (
@@ -114,6 +116,7 @@ export const PublicationsHub = ({ onOpenCitation, onSelectProfessor }) => {
                 onChange={(e) => setSelectedType(e.target.value)}
                 className="input-box"
                 style={{ cursor: 'pointer' }}
+                aria-label="Filtrar por tipo"
               >
                 <option value="todos">Todos los Tipos</option>
                 <option value="Artículo">Artículos Arbitrados</option>
@@ -131,6 +134,7 @@ export const PublicationsHub = ({ onOpenCitation, onSelectProfessor }) => {
                 onChange={(e) => setSelectedYear(e.target.value)}
                 className="input-box"
                 style={{ cursor: 'pointer' }}
+                aria-label="Filtrar por año"
               >
                 <option value="todos">Todos los Años</option>
                 {years.map(y => (
@@ -140,17 +144,7 @@ export const PublicationsHub = ({ onOpenCitation, onSelectProfessor }) => {
             </div>
           </div>
 
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginTop: '0.85rem',
-            paddingTop: '0.75rem',
-            borderTop: '1px solid var(--border-light)',
-            fontSize: '0.78rem',
-            fontFamily: 'var(--font-mono)',
-            color: 'var(--text-light)'
-          }}>
+          <div className="filter-info-row">
             <div>
               Mostrando <strong style={{ color: 'var(--text-main)' }}>{filteredWorks.length}</strong> trabajos académicos
             </div>
@@ -162,7 +156,7 @@ export const PublicationsHub = ({ onOpenCitation, onSelectProfessor }) => {
                   setSelectedType('todos');
                   setSelectedYear('todos');
                 }}
-                style={{ color: 'var(--gold)', fontWeight: 600, textDecoration: 'underline' }}
+                className="filter-clear-btn"
               >
                 Limpiar filtros
               </button>
@@ -188,7 +182,7 @@ export const PublicationsHub = ({ onOpenCitation, onSelectProfessor }) => {
               return (
                 <div key={work.id} className="paper-item-card">
                   <div className="paper-header">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                       <span className="type-pill">
                         {work.tipoDetalle || work.tipo}
                       </span>
@@ -202,23 +196,13 @@ export const PublicationsHub = ({ onOpenCitation, onSelectProfessor }) => {
                     {/* Chip del Autor */}
                     <button
                       onClick={() => onSelectProfessor(work.authorId)}
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '6px',
-                        padding: '3px 8px',
-                        borderRadius: '20px',
-                        backgroundColor: 'var(--bg-muted)',
-                        fontSize: '0.75rem',
-                        color: 'var(--text-main)',
-                        transition: 'background-color 150ms ease'
-                      }}
+                      className="paper-author-chip"
                       title={`Ver ficha completa de ${work.authorName}`}
                     >
                       <img
                         src={work.authorPhoto}
                         alt=""
-                        style={{ width: '16px', height: '16px', borderRadius: '50%', objectFit: 'cover' }}
+                        style={{ width: '18px', height: '18px', borderRadius: '50%', objectFit: 'cover' }}
                       />
                       <span style={{ fontWeight: 600 }}>{work.authorShort}</span>
                     </button>
@@ -249,7 +233,7 @@ export const PublicationsHub = ({ onOpenCitation, onSelectProfessor }) => {
                       <button
                         onClick={() => toggleAbstract(work.id)}
                         className="btn-text-action"
-                        style={{ padding: '0.2rem 0', color: 'var(--gold)', fontWeight: 600 }}
+                        style={{ padding: '0.3rem 0', color: 'var(--gold)', fontWeight: 600 }}
                       >
                         <span>{isExpanded ? 'Ocultar Resumen' : 'Ver Resumen'}</span>
                         {isExpanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
@@ -273,16 +257,16 @@ export const PublicationsHub = ({ onOpenCitation, onSelectProfessor }) => {
                   )}
 
                   <div className="paper-footer">
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-light)' }}>
+                    <div className="paper-citations-info">
                       {work.doi && (
-                        <span>DOI: <a href={work.enlace} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--uas-blue)' }}>{work.doi}</a></span>
+                        <span className="paper-doi-wrap">DOI: <a href={work.enlace} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--uas-blue)' }}>{work.doi}</a></span>
                       )}
                       {work.citas && (
-                        <span style={{ marginLeft: '12px', fontWeight: 600, color: 'var(--text-main)' }}>Citas: {work.citas}</span>
+                        <span className="paper-citas-badge">Citas: {work.citas}</span>
                       )}
                     </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div className="paper-action-btns">
                       {work.bibtex && (
                         <button
                           onClick={() => onOpenCitation(work)}

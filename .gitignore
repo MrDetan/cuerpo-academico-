@@ -18,6 +18,7 @@ dist-ssr/
 *.local
 .env*.local
 extracted_assets/
+pdf_preview/
 
 # Editor directories and files
 .vscode/*
